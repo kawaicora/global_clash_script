@@ -8,6 +8,9 @@ function main(config, profileName) {
     }
     const hasSelectNode = config['proxy-groups'].some(group => group.name === global_append_select_node_name);
     let proxie_names = []
+    if(!config.proxies){
+        config.proxies = [] //没节点玩个毛线,这只是防止脚本出错
+    }
     config.proxies.forEach(element => {
         proxie_names.push(element.name)
     });
