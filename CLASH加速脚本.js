@@ -1,7 +1,7 @@
 // Define main function (script entry)
 function main(config, profileName) {
     let not_rule_field = false
-    let global_append_select_node_name = '🔰 全局脚本附加规则选择节点';
+    let global_append_select_node_name = '🔰 脚本附加规则选择节点';
     // 检查是否存在 proxy-groups 字段，如果不存在则添加
     if (!config['proxy-groups']) {
         config['proxy-groups'] = [];
@@ -30,12 +30,15 @@ function main(config, profileName) {
 
     // 定义要添加的规则数组
     let rules = [
-        // - PROCESS-NAME,vrchat.exe,SOCKS5 Proxy
+        // `PROCESS-NAME,vrchat.exe, ${global_append_select_node_name}`,
+        `PROCESS-NAME,git.exe,${global_append_select_node_name}`,
+        `PROCESS-NAME,FlightSimulator2024.exe, ${global_append_select_node_name}`,
         `IP-CIDR,216.120.180.0/24,${global_append_select_node_name}`, // VRChat 游戏服务器 进行范围匹配
         `DOMAIN,files.vrchat.cloud,${global_append_select_node_name}`, // VRChat 文件服务器
         `DOMAIN,file-variants.vrchat.cloud,${global_append_select_node_name}`, // VRChat 文件服务器
         `DOMAIN,*.exitgames.com,${global_append_select_node_name}`, // VRChat 主服务器 
         `DOMAIN,ns.photonengine.io,${global_append_select_node_name}`, // VRChat DNS服务器
+        // `DOMAIN,*.microsoft.com,${global_append_select_node_name}`, // 微软
     ];
     
     // 将新规则添加到 config 的 rules 数组的最前面
@@ -46,5 +49,3 @@ function main(config, profileName) {
 
     return config;
 }
-
-
